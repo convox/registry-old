@@ -1,0 +1,30 @@
+convox:
+  issue: "convox registry"
+  debug: false
+  loglevel: info
+  standalone: true
+  storage_redirect: false
+  search_backend: sqlalchemy
+  sqlalchemy_index_database: _env:SQLALCHEMY_INDEX_DATABASE:sqlite:////tmp/docker-registry.db
+  storage: s3
+  s3_secure: false
+  s3_encrypt: false
+  storage_path: /registry
+  boto_host: _env:S3_PORT_80_TCP_ADDR
+  boto_port: _env:S3_PORT_80_TCP_PORT
+  s3_region: _env:S3_ENV_AWS_REGION
+  s3_access_key: _env:S3_ENV_AWS_ACCESS
+  s3_secret_key: _env:S3_ENV_AWS_SECRET
+  s3_bucket: _env:S3_ENV_AWS_BUCKET
+  boto_bucket: _env:S3_ENV_AWS_BUCKET
+  boto_calling_format: _env:S3_ENV_BOTO_CALLING_FORMAT
+  cache:
+    host: _env:REDIS_PORT_6379_TCP_ADDR
+    port: _env:REDIS_PORT_6379_TCP_PORT
+    db: 0
+    password: _env:REDIS_ENV_REDIS_PASSWORD
+  cache_lru:
+    host: _env:REDIS_PORT_6379_TCP_ADDR
+    port: _env:REDIS_PORT_6379_TCP_PORT
+    db: 1
+    password: _env:REDIS_ENV_REDIS_PASSWORD
