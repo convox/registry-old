@@ -4,7 +4,7 @@ Run a local Docker [registry](https://github.com/docker/docker-registry).
 
 ## Usage
 
-    $ docker run -p 5000 convox/registry
+    $ docker run -p 5000:443 convox/registry
 
 ## License
 
