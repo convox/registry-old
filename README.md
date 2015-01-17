@@ -8,6 +8,4 @@ Run a local Docker [registry](https://github.com/docker/docker-registry).
 
 ## License
 
-Apache 2.0
-
-&copy; 2015 David Dollar
+Apache 2.0 &copy; 2015 David Dollar
