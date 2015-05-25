@@ -1,11 +1,22 @@
-convox:
-  issue: "convox registry"
-  debug: false
-  loglevel: info
-  standalone: true
-  storage_redirect: false
-  search_backend: sqlalchemy
-  sqlalchemy_index_database: _env:SQLALCHEMY_INDEX_DATABASE:sqlite:////tmp/docker-registry.db
+common: &common
+    issue: "convox registry"
+    loglevel: _env:LOGLEVEL:info
+    debug: _env:DEBUG:false
+    standalone: _env:STANDALONE:true
+    index_endpoint: _env:INDEX_ENDPOINT:https://index.docker.io
+    storage_redirect: _env:STORAGE_REDIRECT
+    disable_token_auth: _env:DISABLE_TOKEN_AUTH
+    privileged_key: _env:PRIVILEGED_KEY
+    search_backend: _env:SEARCH_BACKEND
+    sqlalchemy_index_database: _env:SQLALCHEMY_INDEX_DATABASE:sqlite:////tmp/docker-registry.db
+
+local: &local
+    <<: *common
+    storage: local
+    storage_path: _env:STORAGE_PATH:/tmp/registry
+
+s3: &s3
+  <<: *common
   storage: s3
   s3_secure: false
   s3_encrypt: false

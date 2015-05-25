@@ -9,7 +9,7 @@ COPY nginx.conf /etc/nginx/sites-enabled/registry.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 ENV DOCKER_REGISTRY_CONFIG /docker-registry/config/config_convox.yml
-ENV SETTINGS_FLAVOR convox
+ENV SETTINGS_FLAVOR s3
 
 EXPOSE 443
 
