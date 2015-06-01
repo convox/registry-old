@@ -6,6 +6,7 @@ error() {
 }
 
 /usr/local/bin/gen-cert
+/usr/local/bin/gen-passwd
 
 nginx &
 

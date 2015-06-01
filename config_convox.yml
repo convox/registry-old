@@ -21,11 +21,9 @@ s3: &s3
   s3_secure: false
   s3_encrypt: false
   storage_path: /registry
-  boto_host: _env:S3_PORT_80_TCP_ADDR
-  boto_port: _env:S3_PORT_80_TCP_PORT
-  s3_region: _env:S3_ENV_AWS_REGION
-  s3_access_key: _env:S3_ENV_AWS_ACCESS
-  s3_secret_key: _env:S3_ENV_AWS_SECRET
-  s3_bucket: _env:S3_ENV_AWS_BUCKET
-  boto_bucket: _env:S3_ENV_AWS_BUCKET
-  boto_calling_format: _env:S3_ENV_BOTO_CALLING_FORMAT
+  s3_region: _env:AWS_REGION
+  s3_access_key: _env:AWS_ACCESS
+  s3_secret_key: _env:AWS_SECRET
+  s3_bucket: _env:BUCKET
+  boto_bucket: _env:BUCKET
+  boto_calling_format: boto.s3.connection.OrdinaryCallingFormat
