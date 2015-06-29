@@ -13,6 +13,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 ENV DOCKER_REGISTRY_CONFIG /docker-registry/config/config_convox.yml
 ENV SETTINGS_FLAVOR local
 
+EXPOSE 3000
 EXPOSE 443
 
 WORKDIR /docker-registry
