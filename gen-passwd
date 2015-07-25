@@ -1,4 +1,0 @@
-#!/bin/sh
-set -ex
-
-htpasswd -bc /etc/nginx/docker-registry.htpasswd convox "$PASSWORD"

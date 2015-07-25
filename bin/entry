@@ -1,0 +1,12 @@
+#!/bin/sh
+
+/usr/local/bin/gen-cert
+/usr/local/bin/gen-passwd
+
+export REGISTRY_HTTP_SECRET=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+export REGISTRY_STORAGE_S3_REGION=$AWS_REGION
+export REGISTRY_STORAGE_S3_ACCESSKEY=$AWS_ACCESS
+export REGISTRY_STORAGE_S3_SECRETKEY=$AWS_SECRET
+export REGISTRY_STORAGE_S3_BUCKET=$REGISTRY_BUCKET
+
+exec $*
