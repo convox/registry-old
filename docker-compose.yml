@@ -1,0 +1,10 @@
+registry:
+  build: .
+  environment:
+    - AWS_REGION
+    - AWS_ACCESS
+    - AWS_SECRET
+    - BUCKET
+    - PASSWORD
+  ports:
+    - 443:443

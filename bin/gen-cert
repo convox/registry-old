@@ -1,0 +1,15 @@
+#!/bin/sh
+set -ex
+
+# Script inspired by:
+# http://crohr.me/journal/2014/generate-self-signed-ssl-certificate-without-prompt-noninteractive-mode.html
+# https://serversforhackers.com/using-ssl-certificates-with-haproxy
+
+mkdir -p /etc/registry
+
+openssl genrsa -out /etc/registry/cert.key 2048
+
+openssl req -new -key /etc/registry/cert.key -out /etc/registry/cert.csr \
+  -subj "/C=US/ST=California/L=San Francisco/O=Convox/CN=*.*.elb.amazonaws.com"
+
+openssl x509 -req -days 365 -in /etc/registry/cert.csr -signkey /etc/registry/cert.key -out /etc/registry/cert.pub
