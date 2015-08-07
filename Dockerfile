@@ -1,4 +1,4 @@
-FROM convox/distribution
+FROM distribution/registry:latest
 
 RUN apt-get -y update
 RUN apt-get -y install apache2-utils
