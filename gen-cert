@@ -1,0 +1,14 @@
+#!/bin/sh
+set -ex
+
+# Script inspired by:
+# http://crohr.me/journal/2014/generate-self-signed-ssl-certificate-without-prompt-noninteractive-mode.html
+# https://serversforhackers.com/using-ssl-certificates-with-haproxy
+
+openssl genrsa -des3 -passout pass:x -out /etc/ssl/private/pass 2048
+openssl rsa -passin pass:x -in /etc/ssl/private/pass -out /etc/ssl/private/docker-registry
+rm /etc/ssl/private/pass
+
+openssl req -new -key /etc/ssl/private/docker-registry -out /etc/ssl/certs/csr \
+  -subj "/C=US/ST=California/L=San Francisco/O=Convox/OU=Kernel/CN=*.*.elb.amazonaws.com"
+openssl x509 -req -days 365 -in /etc/ssl/certs/csr -signkey /etc/ssl/private/docker-registry -out /etc/ssl/certs/docker-registry

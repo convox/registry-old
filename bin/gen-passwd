@@ -1,4 +1,0 @@
-#!/bin/sh
-set -ex
-
-htpasswd -Bbc /etc/registry/registry.htpasswd convox "$PASSWORD"

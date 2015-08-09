@@ -1,0 +1,29 @@
+common: &common
+    issue: "convox registry"
+    loglevel: _env:LOGLEVEL:info
+    debug: _env:DEBUG:false
+    standalone: _env:STANDALONE:true
+    index_endpoint: _env:INDEX_ENDPOINT:https://index.docker.io
+    storage_redirect: _env:STORAGE_REDIRECT
+    disable_token_auth: _env:DISABLE_TOKEN_AUTH
+    privileged_key: _env:PRIVILEGED_KEY
+    search_backend: _env:SEARCH_BACKEND
+    sqlalchemy_index_database: _env:SQLALCHEMY_INDEX_DATABASE:sqlite:////tmp/docker-registry.db
+
+local: &local
+    <<: *common
+    storage: local
+    storage_path: _env:STORAGE_PATH:/tmp/registry
+
+s3: &s3
+  <<: *common
+  storage: s3
+  s3_secure: false
+  s3_encrypt: false
+  storage_path: /registry
+  s3_region: _env:AWS_REGION
+  s3_access_key: _env:AWS_ACCESS
+  s3_secret_key: _env:AWS_SECRET
+  s3_bucket: _env:BUCKET
+  boto_bucket: _env:BUCKET
+  boto_calling_format: boto.s3.connection.OrdinaryCallingFormat

@@ -1,14 +1,21 @@
-FROM convox/distribution
+FROM registry:0.9.1
 
-RUN apt-get -y update
-RUN apt-get -y install apache2-utils
+RUN apt-get update
+RUN apt-get install -y nginx curl apache2-utils
 
-COPY bin/gen-cert /usr/local/bin/gen-cert
-COPY bin/gen-passwd /usr/local/bin/gen-passwd
-COPY bin/entry /usr/local/bin/entry
-COPY registry.conf /etc/registry/registry.conf
+COPY gen-cert /usr/local/bin/gen-cert
+COPY gen-passwd /usr/local/bin/gen-passwd
+COPY config_convox.yml /docker-registry/config/config_convox.yml
+COPY docker-registry.conf /etc/nginx/docker-registry.conf
+COPY nginx.conf /etc/nginx/sites-enabled/registry.conf
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
+ENV DOCKER_REGISTRY_CONFIG /docker-registry/config/config_convox.yml
+ENV SETTINGS_FLAVOR local
+
+EXPOSE 3000
 EXPOSE 443
 
-ENTRYPOINT ["/usr/local/bin/entry"]
-CMD ["registry", "/etc/registry/registry.conf"]
+WORKDIR /docker-registry
+
+CMD ["/docker-entrypoint.sh"]
